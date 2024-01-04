@@ -19,8 +19,25 @@ else {
 }
 
 # Install Sysmon
-Invoke-webrequest https://download.sysinternals.com/files/Sysmon.zip -Outfile sysmon.zip
-Expand-Archive -path .\sysmon.zip -DestinationPath .\
+# Check if sysmon.zip already exists
+if (Test-Path .\sysmon.zip)
+{
+    Write-Host "[*] Sysmon.zip already exists" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[*] Downloading Sysmon.zip" -ForegroundColor Green -BackgroundColor Black
+    Invoke-webrequest https://download.sysinternals.com/files/Sysmon.zip -Outfile sysmon.zip
+}
+
+# Check if sysmon.exe already exists
+if (Test-Path .\sysmon.exe)
+{
+    Write-Host "[*] Sysmon.exe already exists" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[*] Extracting Sysmon.exe" -ForegroundColor Green -BackgroundColor Black
+    Expand-Archive -path .\sysmon.zip -DestinationPath .\
+}
 
 # Enable every thing
 # Invoke-WebRequest https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml -OutFile .\sysmon.xml
