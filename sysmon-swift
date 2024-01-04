@@ -1,0 +1,60 @@
+# Admin check
+if ((New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
+{
+    Write-Host "[*] Running as Administrator" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[!] Please run this script as Administrator" -ForegroundColor Red -BackgroundColor Black
+    Break
+}
+
+# Check for PowerShell version 5.1 or higher
+if ($PSVersionTable.PSVersion.Major -ge 5 -and $PSVersionTable.PSVersion.Minor -ge 1)
+{
+    Write-Host "[*] PowerShell version 5.1 or higher is installed" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[!] Please install PowerShell version 5.1 or higher" -ForegroundColor Red -BackgroundColor Black
+    Break
+}
+
+# Install Sysmon
+# Check if sysmon.zip already exists
+if (Test-Path .\sysmon.zip)
+{
+    Write-Host "[*] Sysmon.zip already exists" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[*] Downloading Sysmon.zip" -ForegroundColor Green -BackgroundColor Black
+    Invoke-webrequest https://download.sysinternals.com/files/Sysmon.zip -Outfile sysmon.zip
+}
+
+# Check if sysmon.exe already exists
+if (Test-Path .\sysmon.exe)
+{
+    Write-Host "[*] Sysmon.exe already exists" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[*] Extracting Sysmon.exe" -ForegroundColor Green -BackgroundColor Black
+    Expand-Archive -path .\sysmon.zip -DestinationPath .\
+}
+
+# Enable every thing
+Invoke-WebRequest https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml -OutFile .\sysmon.xml
+
+#Invoke-WebRequest https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml -OutFile .\sysmon.xml
+
+#Invoke-WebRequest https://gist.githubusercontent.com/garrett-white/ac431ea5bab3fef22f958f6a0ff7492a/raw/405128dcbc028d561595a606d441a18862db096f/sysmonconfig.xml -OutFile .\sysmon.xml
+# Install Sysmon with config
+# sysmon -accepteula -i .\sysmon.xml
+
+# Install Sysmon default config
+# Check if sysmon is already installed
+if (Test-Path .\sysmon.exe)
+{
+    Write-Host "[*] Sysmon is already installed" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[*] Installing Sysmon" -ForegroundColor Green -BackgroundColor Black
+    .\sysmon.exe -accepteula -i
+}
