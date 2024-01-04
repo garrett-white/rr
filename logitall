@@ -1,7 +1,8 @@
 # This should enable all categories without having to enumerate them
+Write-Host "[*] Enabling every Windows Audit policy" -ForegroundColor Green -BackgroundColor Black
 auditpol /set /category:* /failure:enable /success:enable
 
-# Set Security Event Log to 2GB
+Write-Host "[*] Setting the Windows Security Log to 2GB" -ForegroundColor Green -BackgroundColor Black
 $SecurityLog = Get-WinEvent -ListLog "Security"
 $SecurityLog.MaximumSizeInBytes = 2147483648 # 2GB in bytes
 $SecurityLog.SaveChanges()
