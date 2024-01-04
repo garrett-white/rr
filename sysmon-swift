@@ -30,7 +30,7 @@ else {
 }
 
 # Check if sysmon.exe already exists
-if (Test-Path .\sysmon.exe)
+if (test-path c:\Windows\SysmonDrv.sys)
 {
     Write-Host "[*] Sysmon.exe already exists" -ForegroundColor Green -BackgroundColor Black
 }
