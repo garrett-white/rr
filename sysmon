@@ -23,13 +23,13 @@ Invoke-webrequest https://download.sysinternals.com/files/Sysmon.zip -Outfile sy
 Expand-Archive -path .\sysmon.zip -DestinationPath .\
 
 # Enable every thing
-Invoke-WebRequest https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml -OutFile .\sysmon.xml
+# Invoke-WebRequest https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml -OutFile .\sysmon.xml
 
-Invoke-WebRequest https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml -OutFile .\sysmon.xml
+#Invoke-WebRequest https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml -OutFile .\sysmon.xml
 
 Invoke-WebRequest https://gist.githubusercontent.com/garrett-white/ac431ea5bab3fef22f958f6a0ff7492a/raw/405128dcbc028d561595a606d441a18862db096f/sysmonconfig.xml -OutFile .\sysmon.xml
 # Install Sysmon with config
-sysmon -accepteula -i .\sysmon.xml
+# sysmon -accepteula -i .\sysmon.xml
 
 # Install Sysmon default config
 sysmon -accepteula -i
