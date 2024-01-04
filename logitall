@@ -1,0 +1,7 @@
+# This should enable all categories without having to enumerate them
+auditpol /set /category:* /failure:enable /success:enable
+
+# Set Security Event Log to 2GB
+$SecurityLog = Get-WinEvent -ListLog "Security"
+$SecurityLog.MaximumSizeInBytes = 2147483648 # 2GB in bytes
+$SecurityLog.SaveChanges()
