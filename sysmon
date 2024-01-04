@@ -32,4 +32,4 @@ Invoke-WebRequest https://gist.githubusercontent.com/garrett-white/ac431ea5bab3f
 # sysmon -accepteula -i .\sysmon.xml
 
 # Install Sysmon default config
-sysmon -accepteula -i
+.\sysmon.exe -accepteula -i
