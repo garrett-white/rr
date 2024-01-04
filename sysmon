@@ -49,4 +49,12 @@ Invoke-WebRequest https://gist.githubusercontent.com/garrett-white/ac431ea5bab3f
 # sysmon -accepteula -i .\sysmon.xml
 
 # Install Sysmon default config
-.\sysmon.exe -accepteula -i
+# Check if sysmon is already installed
+if (Test-Path .\sysmon.exe)
+{
+    Write-Host "[*] Sysmon is already installed" -ForegroundColor Green -BackgroundColor Black
+}
+else {
+    Write-Host "[*] Installing Sysmon" -ForegroundColor Green -BackgroundColor Black
+    .\sysmon.exe -accepteula -i
+}
